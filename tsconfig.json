@@ -1,0 +1,13 @@
+{
+    "extends": "@tsconfig/recommended/tsconfig.json",
+    "compilerOptions": {
+        "outDir": "build",
+        "allowJs": true,
+        "declaration": true,
+        "noUnusedLocals": true,
+        "removeComments": true
+    },
+    "include": [
+        "src"
+    ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "common-utils-js",
+  "version": "1.0.0",
+  "description": "Some commonly used javascript functions",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/**",
+    "build": "tsc",
+    "run": "node build/index.js",
+    "start": "npm run-script build & npm run-script run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thegoodcompany/common-utils-js.git"
+  },
+  "author": "Azraf Taohid <azraftaohid@outlook.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thegoodcompany/common-utils-js/issues"
+  },
+  "homepage": "https://github.com/thegoodcompany/common-utils-js#readme",
+  "engines": {
+    "node": ">=10"
+  },
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/parser": "^4.15.2",
+    "eslint": "^7.21.0",
+    "eslint-config-prettier": "^8.1.0",
+    "prettier": "2.2.1",
+    "typescript": "^4.2.2"
+  }
+}
