@@ -27,6 +27,7 @@
         "@typescript-eslint/prefer-for-of": "warn",
         "@typescript-eslint/triple-slash-reference": "error",
         "@typescript-eslint/unified-signatures": "warn",
+        "@typescript-eslint/ban-types": "off",
         "@typescript-eslint/no-shadow": [
             "error",
             {

@@ -1,6 +1,6 @@
 {
   "name": "common-utils-js",
-  "version": "1.1.2",
+  "version": "1.2.3",
   "description": "Some commonly used javascript functions",
   "main": "build/index.js",
   "scripts": {
