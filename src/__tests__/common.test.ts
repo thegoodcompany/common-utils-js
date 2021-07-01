@@ -1,4 +1,4 @@
-import { replaceProps } from "../common";
+import { flattenObject, iterateProps, replaceProps } from "../common";
 
 test("replace object props", () => {
 	const testObj: ReplaceTestObjInterface = {
@@ -72,6 +72,71 @@ test("replace object props", () => {
 
 	expect(testObj2).toBe(undefined);
 	expect(JSON.stringify(testObj3)).toBe(JSON.stringify({}));
+})
+
+test("flatten object", () => {
+	const obj1 = {
+		a: 5,
+		b: "a string",
+		c: {
+			a: 6,
+			b: "another string",
+			c: {
+				a: 7,
+				b: "thats another" 
+			}
+		},
+		d: {
+			a: 6,
+			b: "one other string",
+		}
+	};
+
+	const flattened1 = flattenObject(obj1);
+
+	expect(JSON.stringify(flattened1)).toBe(JSON.stringify({
+		a: 5,
+		b: "a string",
+		"c.a": 6,
+		"c.b": "another string",
+		"d.a": 6,
+		"d.b": "one other string",
+		"c.c.a": 7,
+		"c.c.b": "thats another",
+	}));
+});
+
+test("iterate through object props (inc. nested)", () => {
+	const obj1 = {
+		a: 5,
+		b: "a string",
+		c: {
+			a: 6,
+			b: "another string",
+			c: {
+				a: 8,
+				b: "thats another" 
+			}
+		},
+		d: {
+			a: 7,
+			b: "one other string",
+		}
+	};
+
+	const partialAbsClone: Record<string, unknown> = {};
+	iterateProps(obj1, (_p, value, _k, absKey) => {
+		partialAbsClone[absKey] = value;
+		return value === 7;
+	})
+
+	expect(JSON.stringify(partialAbsClone)).toBe(JSON.stringify({
+		a: 5,
+		b: "a string",
+		"c.a": 6,
+		"c.b": "another string",
+		"d.a": 7,
+	}))
 })
 
 class ReplaceTestClass {
