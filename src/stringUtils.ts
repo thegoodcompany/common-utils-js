@@ -62,3 +62,11 @@ export function reverseSplitAfterEach(count: number, str: string): string[] {
 
     return splitString;
 }
+
+// todo: support RegEx for separator
+export function toCamelCase(str: string, reserveSep?: boolean, sep?: string): string {
+    const space = sep || " ";
+    return str.split(space)
+        .map(word => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
+        .join(reserveSep ? space : "");
+}

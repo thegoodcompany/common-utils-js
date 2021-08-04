@@ -1,4 +1,4 @@
-import { halfReverseSplitAfterEach, removeCharAt, reverseSplitAfterEach, splitAfterEach } from "../stringUtils";
+import { halfReverseSplitAfterEach, removeCharAt, reverseSplitAfterEach, splitAfterEach, toCamelCase } from "../stringUtils";
 
 test("test string remove char at index", () => {
     expect(removeCharAt("pottato", 2)).toBe("potato");
@@ -17,4 +17,10 @@ test("test split after each", () => {
 test("test reverse split", () => {
     expect(halfReverseSplitAfterEach(2, "20211")).toStrictEqual(["2", "02", "11"]);
     expect(reverseSplitAfterEach(2, "20211")).toStrictEqual(["11", "02", "2"]);
+})
+
+test("test to camel case", () => {
+    expect(toCamelCase("ABC DEF")).toBe("AbcDef");
+    expect(toCamelCase("ABC DEF", true)).toBe("Abc Def");
+    expect(toCamelCase("ABC_DEF", true, "_")).toBe("Abc_Def");
 })
