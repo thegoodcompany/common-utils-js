@@ -1,6 +1,6 @@
 {
   "name": "@thegoodcompany/common-utils-js",
-  "version": "1.2.8",
+  "version": "1.3.0",
   "description": "Some commonly used javascript functions",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

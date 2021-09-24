@@ -47,9 +47,10 @@ export function flattenObject(o: object | undefined): Record<string, unknown> {
  * 
  * @param o             the object to iterate through
  * @param callbackFunc  a callback function that will be called on each of the properties (including nested properties) of the object
+ * @param includeObj    invoke the callback functions for object properties as well
  * @return true if {@code callbackFunc} ever returns true
  */
-export function iterateProps(o: object, callbackFunc: (directParent: Record<string, unknown>, value: unknown, key: string, absKey: string) => unknown | boolean): boolean {
+export function iterateProps(o: object, callbackFunc: IteratePropsCallback, includeObj?: boolean): boolean {
 	const parents: IterateObjectContainer[] = [{ absKey: "", obj: o as Record<string, unknown>}];
     let len = parents.length;
 
@@ -67,13 +68,13 @@ export function iterateProps(o: object, callbackFunc: (directParent: Record<stri
             if (value && typeof value === "object") {
                 parents.push({ absKey: absKey, obj: value as Record<string, unknown>});
                 len++;
-            } else {
-                // because predicate accepts any value that is coercible to the Boolean value true
-                // as true; but we don't
-                if (callbackFunc(parent, value, key, absKey) === true)
-                    return true;
-			}
 
+                if (!includeObj) return false;
+            }
+
+            // because predicate accepts any value that is coercible to the Boolean value true
+            // as true; but we don't
+            if (callbackFunc(parent, value, key, absKey) === true) return true;
             return false;
         })) {
             return true;
@@ -88,3 +89,5 @@ interface IterateObjectContainer {
 	absKey: string,
 	obj: Record<string, unknown>,
 }
+
+export type IteratePropsCallback = (directParent: Record<string, unknown>, value: unknown, key: string, absKey: string) => unknown | boolean;

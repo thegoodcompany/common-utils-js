@@ -137,6 +137,36 @@ test("iterate through object props (inc. nested)", () => {
 		"c.b": "another string",
 		"d.a": 7,
 	}))
+
+	const partialAbsClone2: Record<string, unknown> = {};
+	iterateProps(obj1, (_p, value, _k, absKey) => {
+		partialAbsClone2[absKey] = value;
+		return value === 7;
+	}, true)
+
+	expect(JSON.stringify(partialAbsClone2, undefined, 2)).toBe(JSON.stringify({
+		a: 5,
+		b: "a string",
+		c: {
+			a: 6,
+			b: "another string",
+			c: {
+				a: 8,
+				b: "thats another" 
+			}
+		},
+		d: {
+			a: 7,
+			b: "one other string",
+		},
+		"c.a": 6,
+		"c.b": "another string",
+		"c.c": {
+			a: 8,
+			b: "thats another" 
+		},
+		"d.a": 7,
+	}, undefined, 2))
 })
 
 class ReplaceTestClass {
