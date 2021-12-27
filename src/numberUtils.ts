@@ -226,6 +226,21 @@ function toWordAtOffset(number: number, offset: number): string {
     return _num.ones + " " + suffixes[offset - 3];
 }
 
+/**
+ * @param from start of range. must be <= 1 and >= 0
+ * @param to end of range. must be <= 1 and >= 0
+ * @returns a random number from given range
+ */
+export function getRand(from: number, to: number): number {
+    if (from === to) return from;
+    
+    const max = Math.abs(to - from);
+    for ( ; ; ) {
+        const rand = Math.random();
+        if (rand <= max) return Math.min(from, to) + rand;
+    }
+}
+
 export type ReadMode = readModes;
 
 interface NumberInterface {

@@ -1,3 +1,4 @@
+import { getRand } from "..";
 import { extractNumbers, readModes, toWord } from "../numberUtils";
 
 test("extract numbers from string", () => {
@@ -34,4 +35,17 @@ test("convert number to words", () => {
     expect(toWord("5000000", readModes.NUMBER)).toBe("Five million");
     expect(toWord("5000001", readModes.NUMBER)).toBe("Five million one");
     expect(toWord("5000010", readModes.NUMBER)).toBe("Five million ten");
+})
+
+test("rand generator", () => {
+    const between = (actual: number, from: number, to: number) => {
+        expect(actual).toBeLessThanOrEqual(to);
+        expect(actual).toBeGreaterThanOrEqual(from);
+    }
+
+    between(getRand(0, 1), 0, 1);
+    between(getRand(.5, 1), .5, 1);
+    between(getRand(1, .5), .5, 1);
+    between(getRand(1, 1), 1, 1);
+    between(getRand(.3, .7), .3, .7);
 })
