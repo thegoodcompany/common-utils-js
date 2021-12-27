@@ -31,5 +31,13 @@ test("time conversion is okay", () => {
 	expect(eMillis.toMillis().value).toBe(7.6032e+9);
 	expect(eMillis.toNanos().value).toBe(7.6032e+15);
 
-	expect(+eMillis.toDays()).toBe(eMillis.toDays().value);
+	expect(new Days(1).equals(new Hours(24))).toBe(true);
+	expect(new Days(2).equals(new Hours(47))).toBe(false);
+
+	expect(new Minutes(70) < new Hours(2)).toBe(true);
+	expect(new Minutes(70) > new Hours(1)).toBe(true);
+
+	expect(new Nanos(100) < new Millis(1)).toBe(true);
+	expect(new Nanos(1200000) > new Millis(1)).toBe(true);
+	expect(new Nanos(100) < new Nanos(200)).toBe(true);
 })

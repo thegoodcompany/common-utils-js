@@ -43,7 +43,11 @@ export abstract class TimeUnit {
 	}
 
 	public valueOf(): number {
-		return this.value;
+		return this.toBase();
+	}
+
+	public equals(unit: TimeUnit): boolean {
+		return this.valueOf() === unit.valueOf();
 	}
 }
 
