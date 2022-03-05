@@ -70,3 +70,36 @@ export function toCamelCase(str: string, reserveSep?: boolean, sep?: string): st
         .map(word => word.charAt(0).toUpperCase() + word.substring(1).toLowerCase())
         .join(reserveSep ? space : "");
 }
+
+/**
+ * Formats {@code date} into string.
+ * # year, month, day
+ *  - long: January 01, 2021
+ *  - short: Jan 09, 2021
+ *  - default: same as long
+ * 
+ * # year, month, day, hour/hour23, second
+ *  - hour: Jan 01, 2021, 12:39 AM
+ *  - hour23: Jan 01, 2021, 00:39
+ * 
+ * @param date the date to format
+ * @param formatOption output type: long or short
+ * @param include parameters to include
+ * @returns a formatted date-string
+ */
+ export function formatDate(date: Date, formatOption?: "default" | "short" | "long", ...include: (IncludeOption)[]): string {
+	const opt = !formatOption || formatOption === "default" ? "long" : formatOption;
+	const inc = include.length ? include : ["year", "month", "day", "hour", "minute"];
+
+	return new Intl.DateTimeFormat("en-us", {
+		month: inc.includes("month") ? opt : undefined,
+		day: inc.includes("day") ? "2-digit" : undefined,
+		year: inc.includes("year") ? "numeric" : undefined,
+        hour: inc.some(v => v === "hour" || v === "hour23") ? "2-digit" : undefined,
+        minute: inc.includes("minute") ? "2-digit" : undefined,
+        second: inc.includes("second") ? "2-digit" : undefined,
+        hourCycle: inc.includes("hour23") ? "h23" : undefined,
+	} as Intl.DateTimeFormatOptions & { hourCycle?: string }).format(date);
+}
+
+export type IncludeOption = "month" | "day" | "year" | "hour" | "hour23" | "minute" | "second";

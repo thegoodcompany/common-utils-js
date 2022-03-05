@@ -1,4 +1,4 @@
-import { halfReverseSplitAfterEach, removeCharAt, reverseSplitAfterEach, splitAfterEach, toCamelCase } from "../stringUtils";
+import { formatDate, halfReverseSplitAfterEach, removeCharAt, reverseSplitAfterEach, splitAfterEach, toCamelCase } from "../stringUtils";
 
 test("test string remove char at index", () => {
     expect(removeCharAt("pottato", 2)).toBe("potato");
@@ -23,4 +23,14 @@ test("test to camel case", () => {
     expect(toCamelCase("ABC DEF")).toBe("AbcDef");
     expect(toCamelCase("ABC DEF", true)).toBe("Abc Def");
     expect(toCamelCase("ABC_DEF", true, "_")).toBe("Abc_Def");
+})
+
+test("test date format", () => {
+    const date1 = new Date(2012, 5, 2, 14, 25, 20);
+    const date2 = new Date(2012, 5, 2, 0, 25, 20);
+
+    expect(formatDate(date1, "long", "year", "month", "day")).toBe("June 02, 2012");
+    expect(formatDate(date1, "long", "year", "month", "day", "hour", "minute", "second")).toBe("June 02, 2012, 02:25:20 PM");
+    expect(formatDate(date1, "long", "year", "month", "day", "hour23", "minute")).toBe("June 02, 2012, 14:25");
+    expect(formatDate(date2, "long", "year", "month", "day", "hour23", "minute")).toBe("June 02, 2012, 00:25");
 })
