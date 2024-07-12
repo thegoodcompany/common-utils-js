@@ -1,6 +1,6 @@
 {
   "name": "@thegoodcompany/common-utils-js",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Some commonly used javascript functions",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -41,8 +41,5 @@
   "peerDependencies": {},
   "files": [
     "build"
-  ],
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com/"
-  }
+  ]
 }
