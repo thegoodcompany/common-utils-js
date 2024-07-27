@@ -30,7 +30,7 @@ test("test date format", () => {
     const date2 = new Date(2012, 5, 2, 0, 25, 20);
 
     expect(formatDate(date1, "long", "year", "month", "day")).toBe("June 02, 2012");
-    expect(formatDate(date1, "long", "year", "month", "day", "hour", "minute", "second")).toBe("June 02, 2012, 02:25:20 PM");
-    expect(formatDate(date1, "long", "year", "month", "day", "hour23", "minute")).toBe("June 02, 2012, 14:25");
-    expect(formatDate(date2, "long", "year", "month", "day", "hour23", "minute")).toBe("June 02, 2012, 00:25");
+    expect(formatDate(date1, "long", "year", "month", "day", "hour", "minute", "second")).toBe("June 02, 2012 at 02:25:20 PM");
+    expect(formatDate(date1, "long", "year", "month", "day", "hour23", "minute")).toBe("June 02, 2012 at 14:25");
+    expect(formatDate(date2, "long", "year", "month", "day", "hour23", "minute")).toBe("June 02, 2012 at 00:25");
 })
